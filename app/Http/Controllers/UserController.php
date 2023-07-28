@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\UserRegister;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,67 +12,20 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    /**
-     * Create the user's profile form.
-     */
-    public function create(ProfileUpdateRequest $request): RedirectResponse
+    public function index()
     {
-
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('create');
+        return view('dashboard');
     }
 
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function store(Request $request)
     {
-        return view('user.create', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    /**
-     * Update the user's user information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('user.edit')->with('status', 'user-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        $post = new UserRegister;
+        $post->nome = $request->nome;
+        $post->cpf = $request->cpf;
+        $post->rg = $request->rg;
+        $post->nascimento = $request->nascimento;
+        $post->sexo = $request->sexo;
+        $post->save();
+        return redirect('dashboard')->with('status', 'Blog Post Form Data Has Been inserted');
     }
 }
