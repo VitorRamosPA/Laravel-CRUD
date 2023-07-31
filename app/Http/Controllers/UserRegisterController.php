@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-class UserController extends Controller
+class UserRegisterController extends Controller
 {
-    public function index()
+    public function index(UserRegister $userRegister)
+    {
+        $userRegisters = $userRegister->all();
+        return view('lista', compact('userRegisters'));
+    }
+    public function inicio()
     {
         return view('dashboard');
     }
@@ -26,6 +31,11 @@ class UserController extends Controller
         $post->nascimento = $request->nascimento;
         $post->sexo = $request->sexo;
         $post->save();
-        return redirect('dashboard')->with('status', 'Blog Post Form Data Has Been inserted');
+        return redirect('dashboard')->with('status', 'Cadastrado com sucesso');
+    }
+
+    public function update(Request $request)
+    {
+
     }
 }
