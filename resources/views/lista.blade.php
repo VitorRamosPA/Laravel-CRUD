@@ -11,26 +11,9 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("Pessoas cadastradas") }}
                 </div>
-                <table class="p-6 text-gray-900 dark:text-gray-100">
-                    <thead>
-                    <th> nome</th>
-                    <th> CPF</th>
-                    <th> RG</th>
-                    <th> Nascimento</th>
-                    <th> Sexo</th>
-                    </thead>
-                    <tbody>
-                    @foreach($userRegisters as $userR)
-                        <tr>
-                            <td>{{ $userR->nome }}</td>
-                            <td>{{ $userR->cpf }}</td>
-                            <td>{{ $userR->rg }}</td>
-                            <td>{{ $userR->nascimento }}</td>
-                            <td>{{ $userR->sexo }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                <div class="m-10">
+                <livewire:user-register-table/>
+                </div>
             </div>
         </div>
     </div>

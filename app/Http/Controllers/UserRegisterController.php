@@ -33,4 +33,9 @@ class UserRegisterController extends Controller
         $post->save();
         return redirect('dashboard')->with('status', 'Cadastrado com sucesso');
     }
+
+    public function update(Request $request)
+    {
+
+    }
 }
