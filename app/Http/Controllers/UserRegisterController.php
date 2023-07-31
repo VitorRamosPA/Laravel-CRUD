@@ -19,7 +19,7 @@ class UserRegisterController extends Controller
     }
     public function inicio()
     {
-        return view('dashboard');
+        return view('lista');
     }
 
     public function store(Request $request)
@@ -31,11 +31,23 @@ class UserRegisterController extends Controller
         $post->nascimento = $request->nascimento;
         $post->sexo = $request->sexo;
         $post->save();
-        return redirect('dashboard')->with('status', 'Cadastrado com sucesso');
+        return redirect('lista')->with('msg', 'Cadastrado com sucesso');
     }
 
-    public function update(Request $request)
+    public function destroy($id)
     {
+        UserRegister::findOrFail($id)->delete();
+
+        return redirect('lista')->with('msg', 'Excluído com sucesso');
+    }
+
+    public function edit(UserRegister $userRegister,  )
+    {
+        $this->user_register_id = $userRegister->user_register_id;
+        $this->nome = $userRegister->nome;
+        $this->nascimento = $userRegister->nascimento;
+        $this->cpf = $userRegister->cpf;
+        $this->rg = $userRegister->rg;
 
     }
 }
