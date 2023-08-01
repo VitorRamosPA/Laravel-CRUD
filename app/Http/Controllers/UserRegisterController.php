@@ -43,11 +43,12 @@ class UserRegisterController extends Controller
 
     public function edit(UserRegister $userRegister, Request $request)
     {
-        $this->user_register= $userRegister->user_register;
-        $this->nome = $userRegister->nome;
-        $this->nascimento = $userRegister->nascimento;
-        $this->cpf = $userRegister->cpf;
-        $this->rg = $userRegister->rg;
-        $this->save();
+        UserRegister::query()->where('id', '=', $userRegister->id);
+        $userRegister =  $userRegister->user_register;
+        $userRegister->nome = $request->nome;
+        $userRegister->nascimento = $request->nascimento;
+        $userRegister->cpf = $request->cpf;
+        $userRegister->rg = $request->rg;
+        $userRegister->save();
     }
 }
