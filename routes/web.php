@@ -23,8 +23,8 @@ Route::get('/', function () {
 Route::controller(UserRegisterController::class)->group(function (){
 Route::get('lista', 'inicio')->name('dashboard');
 Route::get('lista', 'index')->name('lista');
-Route::delete('lista', 'destroy')->name('lista.destroy');
-Route::post('lista', 'update')->name('lista.edit');
+Route::delete('lista/{user_register}', 'destroy')->name('lista.destroy');
+Route::post('lista/{user_register}', 'update')->name('lista.edit');
 Route::post('store-form', 'store')->name('store-form');
 });
 

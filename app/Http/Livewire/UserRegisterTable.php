@@ -197,13 +197,7 @@ final class UserRegisterTable extends PowerGridComponent
 
     public function actionRules(): array
     {
-       return [
-
-           //Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($user_register) => $user_register->id === 1)
-                ->hide(),
-        ];
+       return [];
     }
 
 }

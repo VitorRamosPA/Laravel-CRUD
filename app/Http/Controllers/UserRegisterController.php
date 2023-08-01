@@ -36,18 +36,18 @@ class UserRegisterController extends Controller
 
     public function destroy($id)
     {
-        UserRegister::findOrFail($id)->delete();
+        UserRegister::query()->where('id', '=', $id)->delete();
 
-        return redirect('lista')->with('msg', 'Excluído com sucesso');
+        return redirect('lista')->with('alert', 'Excluído com sucesso');
     }
 
-    public function edit(UserRegister $userRegister,  )
+    public function edit(UserRegister $userRegister, Request $request)
     {
-        $this->user_register_id = $userRegister->user_register_id;
+        $this->user_register= $userRegister->user_register;
         $this->nome = $userRegister->nome;
         $this->nascimento = $userRegister->nascimento;
         $this->cpf = $userRegister->cpf;
         $this->rg = $userRegister->rg;
-
+        $this->save();
     }
 }
