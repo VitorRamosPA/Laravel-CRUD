@@ -15,6 +15,8 @@ final class UserRegisterTable extends PowerGridComponent
 {
     use ActionButton;
 
+    public $userRegister;
+
     /*
     |--------------------------------------------------------------------------
     |  Features Setup
@@ -24,8 +26,6 @@ final class UserRegisterTable extends PowerGridComponent
     */
     public function setUp(): array
     {
-        $this->showCheckBox();
-
         return [
             Footer::make()
                 ->showPerPage()
@@ -131,6 +131,11 @@ final class UserRegisterTable extends PowerGridComponent
                 ->editOnClick(true)
                 ->sortable(),
 
+            Column::make('Sexo', 'sexo')
+                ->searchable()
+                ->editOnClick(true)
+                ->sortable(),
+
 
         ];
     }
@@ -147,6 +152,7 @@ final class UserRegisterTable extends PowerGridComponent
             Filter::inputText('nascimento'),
             Filter::inputText('cpf'),
             Filter::inputText('rg'),
+            Filter::inputText('sexo'),
         ];
     }
 
@@ -168,12 +174,12 @@ final class UserRegisterTable extends PowerGridComponent
     public function actions(): array
     {
        return [
-           Button::make('edit', 'Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('lista.edit', ['user_register' => 'id']),
+           Button::make('edit', 'Editar')
+               ->class('flex px-5 bg-indigo-500 cursor-pointer text-white px-1 py-2.5 m-1 rounded text-sm')
+               ->route('lista.update', ['user_register' => 'id']),
 
            Button::make('destroy', 'Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
+               ->class('flex bg-red-500 cursor-pointer text-white px-5 py-2 m-1 rounded text-sm')
                ->route('lista.destroy', ['user_register' => 'id'])
                ->method('delete')
         ];
