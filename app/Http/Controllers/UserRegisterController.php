@@ -17,6 +17,7 @@ class UserRegisterController extends Controller
         $userRegisters = $userRegister->all();
         return view('lista', compact('userRegisters'));
     }
+
     public function inicio()
     {
         return view('lista');
@@ -24,6 +25,14 @@ class UserRegisterController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|max:50',
+            'cpf' => 'required|numeric|unique:user_registers|',
+            'rg' => 'required|numeric|unique:user_registers|',
+            'nascimento' => 'required|date|max:50',
+            'sexo' => 'required']);
+
+
         $post = new UserRegister;
         $post->nome = $request->nome;
         $post->cpf = $request->cpf;
