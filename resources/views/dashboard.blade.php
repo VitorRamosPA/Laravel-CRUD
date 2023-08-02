@@ -8,13 +8,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-300 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Cadastro") }}
-                </div>
+
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 text-gray-900 dark:text-gray-100">
+                            <div class="p-6 text-gray-900 dark:text-gray-100 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                                 Cadastro
                             </div>
                             <div class="m-10">
@@ -56,7 +54,7 @@
                                     <!-- Name -->
                                     <div>
                                         <x-input-label for="sexo" :value="__('Sexo')"/>
-                                        <x-text-input id="sexo" class="block mt-1 w-full" type="text" name="sexo"
+                                        <x-text-input id="sexo" class="block mt-1 w-full" type="" name="sexo"
                                                       :value="old('sexo')" required autofocus autocomplete="sexo"/>
                                         <x-input-error :messages="$errors->get('sexo')" class="mt-2"/>
                                     </div>

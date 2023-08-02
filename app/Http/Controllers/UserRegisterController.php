@@ -40,16 +40,4 @@ class UserRegisterController extends Controller
 
         return redirect('lista')->with('alert', 'Excluído com sucesso');
     }
-
-    public function update(UserRegister $userRegister, Request $request)
-    {
-        UserRegister::query()->where('id', '=', $userRegister->id);
-
-        $userRegister =  $userRegister->user_register;
-        $userRegister->nome = $request->nome;
-        $userRegister->nascimento = $request->nascimento;
-        $userRegister->cpf = $request->cpf;
-        $userRegister->rg = $request->rg;
-        $userRegister->save();
-    }
 }

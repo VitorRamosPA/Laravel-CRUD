@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserRegister extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nome', 'cpf', 'rg', 'nascimento', 'sexo'
+    ];
 }
