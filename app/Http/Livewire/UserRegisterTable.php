@@ -9,11 +9,25 @@ use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
-use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
+use PowerComponents\LivewirePowerGrid\{Button,
+    Column,
+    Exportable,
+    Footer,
+    Header,
+    PowerGrid,
+    PowerGridComponent,
+    PowerGridColumns,
+    Tests\Models\Dish};
 
 final class UserRegisterTable extends PowerGridComponent
 {
     use ActionButton;
+
+    public array $nome;
+    public array $rg;
+    public array $cpf;
+    public array $nascimento;
+    public array $sexo;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,8 +38,6 @@ final class UserRegisterTable extends PowerGridComponent
     */
     public function setUp(): array
     {
-        $this->showCheckBox();
-
         return [
             Footer::make()
                 ->showPerPage()
@@ -87,6 +99,7 @@ final class UserRegisterTable extends PowerGridComponent
             ->addColumn('nome')
             ->addColumn('cpf')
             ->addColumn('rg')
+            ->addColumn('sexo')
             ->addColumn('nascimento', fn (UserRegister $model) => Carbon::parse($model->nascimento)->format('d/m/Y'));
     }
 
@@ -107,28 +120,29 @@ final class UserRegisterTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->searchable()
-                ->sortable(),
-
             Column::make('Nome', 'nome')
                 ->searchable()
-                ->editOnClick(true)
+                ->editOnClick()
                 ->sortable(),
 
             Column::make('Nascimento', 'nascimento')
                 ->searchable()
-                ->editOnClick(true)
+                ->editOnClick()
                 ->sortable(),
 
             Column::make('CPF', 'cpf')
                 ->searchable()
-                ->editOnClick(true)
+                ->editOnClick()
                 ->sortable(),
 
             Column::make('RG', 'rg')
                 ->searchable()
-                ->editOnClick(true)
+                ->editOnClick()
+                ->sortable(),
+
+            Column::make('Sexo', 'sexo')
+                ->searchable()
+                ->editOnClick()
                 ->sortable(),
 
 
@@ -147,6 +161,7 @@ final class UserRegisterTable extends PowerGridComponent
             Filter::inputText('nascimento'),
             Filter::inputText('cpf'),
             Filter::inputText('rg'),
+            Filter::inputText('sexo'),
         ];
     }
 
@@ -168,12 +183,12 @@ final class UserRegisterTable extends PowerGridComponent
     public function actions(): array
     {
        return [
-           Button::make('edit', 'Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('lista.edit', ['user_register' => 'id']),
+//           Button::make('edit', 'Editar')
+//               ->class('flex px-5 bg-indigo-500 cursor-pointer text-white px-1 py-2.5 m-1 rounded text-sm')
+//               ->route('lista.update', ['user_register' => 'id']),
 
            Button::make('destroy', 'Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
+               ->class('flex bg-red-500 cursor-pointer text-white px-5 py-2 m-1 rounded text-sm')
                ->route('lista.destroy', ['user_register' => 'id'])
                ->method('delete')
         ];
@@ -197,13 +212,13 @@ final class UserRegisterTable extends PowerGridComponent
 
     public function actionRules(): array
     {
-       return [
-
-           //Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($user_register) => $user_register->id === 1)
-                ->hide(),
-        ];
+       return [];
     }
 
+    public function onUpdatedEditable(string $id, string $field, string $value): void
+    {
+        UserRegister::query()->find($id)->update([
+            $field => $value,
+        ]);
+    }
 }

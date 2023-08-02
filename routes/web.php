@@ -20,12 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', [UserRegisterController::class, 'inicio'])->name('dashboard');
-Route::post('store-form', [UserRegisterController::class, 'store'])->name('store-form');
-Route::get('lista', [UserRegisterController::class, 'index'])->name('lista');
+Route::controller(UserRegisterController::class)->group(function (){
+Route::get('lista', 'inicio')->name('dashboard');
+Route::get('lista', 'index')->name('lista');
+Route::delete('lista/{user_register}', 'destroy')->name('lista.destroy');
+Route::post('lista/{user_register}', 'update')->name('lista.update');
+Route::post('store-form', 'store')->name('store-form');
+});
 
-Route::patch('lista', [UserRegisterController::class, 'update'])->name('lista.edit');
-Route::delete('lista', [UserRegisterController::class, 'destroy'])->name('lista.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
