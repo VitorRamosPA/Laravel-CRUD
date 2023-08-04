@@ -190,6 +190,7 @@ final class UserRegisterTable extends PowerGridComponent
            Button::make('destroy', 'Delete')
                ->class('flex bg-red-500 cursor-pointer text-white px-5 py-2 m-1 rounded text-sm')
                ->route('lista.destroy', ['user_register' => 'id'])
+               ->target('')
                ->method('delete')
         ];
     }

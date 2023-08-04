@@ -19,47 +19,42 @@
                                 <form method="POST" action="{{ url('store-form') }}">
                                     @csrf
 
-                                    <!-- Nome -->
-                                    <div>
-                                        <x-input-label for="nome" :value="__('Nome')" class=""/>
+                                    <div class="mt-8">
                                         <x-text-input id="nome" class="block mt-1 w-full " type="text" name="nome"
-                                                      :value="old('nome')" required autofocus autocomplete="nome"/>
+                                                      :value="old('nome')" required autofocus autocomplete="nome" placeholder="Seu Nome"/>
                                         <x-input-error :messages="$errors->get('nome')" class="mt-2"/>
                                     </div>
 
-                                    <!-- CPF -->
-                                    <div>
-                                        <x-input-label for="cpf" :value="__('CPF')"/>
+                                    <div class="mt-8">
                                         <x-text-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')"
-                                                      required autofocus autocomplete="cpf"/>
+                                                      required autofocus autocomplete="cpf" placeholder="CPF 999.999.999-99 (com pontuação)"/>
                                         <x-input-error :messages="$errors->get('cpf')" class="mt-2"/>
                                     </div>
 
-                                    <!-- Email Address -->
-                                    <div class="mt-4">
-                                        <x-input-label for="rg" :value="__('RG')"/>
+                                    <div class="mt-8">
                                         <x-text-input id="rg" class="block mt-1 w-full" type="text" name="rg" :value="old('rg')"
-                                                      required autocomplete="rg"/>
+                                                      required autocomplete="rg" placeholder="RG 9.999.999 (com pontuação)"/>
                                         <x-input-error :messages="$errors->get('rg')" class="mt-2"/>
                                     </div>
 
-                                    <!-- Name -->
-                                    <div>
+                                    <div class="mt-8">
                                         <x-input-label for="nascimento" :value="__('Nascimento')"/>
                                         <x-text-input id="nascimento" class="block mt-1 w-full" type="date" name="nascimento"
                                                       :value="old('nascimento')" required autofocus autocomplete="nascimento"/>
                                         <x-input-error :messages="$errors->get('nascimento')" class="mt-2"/>
                                     </div>
 
-                                    <!-- Name -->
-                                    <div>
+                                    <div class="mt-16">
                                         <x-input-label for="sexo" :value="__('Sexo')"/>
-                                        <x-text-input id="sexo" class="block mt-1 w-full" type="" name="sexo"
-                                                      :value="old('sexo')" required autofocus autocomplete="sexo"/>
+                                        <select id="sexo" class="block mt-1 w-full" type="" name="sexo"
+                                                :value="old('sexo')" required autofocus autocomplete="sexo">
+                                            <option value="">--</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Feminino">Feminino</option>
+                                        </select>
                                         <x-input-error :messages="$errors->get('sexo')" class="mt-2"/>
                                     </div>
 
-                                    <!-- Button -->
                                     <div class="flex items-center justify-end mt-4">
 
                                         <x-primary-button class="ml-4">
