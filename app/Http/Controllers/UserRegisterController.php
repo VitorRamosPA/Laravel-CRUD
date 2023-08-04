@@ -26,11 +26,15 @@ class UserRegisterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|max:50',
-            'cpf' => 'required|numeric|unique:user_registers|',
-            'rg' => 'required|numeric|unique:user_registers|',
-            'nascimento' => 'required|date|max:50',
-            'sexo' => 'required']);
+            'nome' => 'required',
+            'cpf' => 'required|unique:user_registers|',
+            'rg' => 'required|unique:user_registers|',
+            'nascimento' => 'required|date',
+            'sexo' => 'required'],
+            [
+                'cpf.unique' => 'O CPF deve ser um valor único',
+                'rg.unique' => 'O RG deve ser um valor único'
+            ]);
 
 
         $post = new UserRegister;
@@ -40,13 +44,13 @@ class UserRegisterController extends Controller
         $post->nascimento = $request->nascimento;
         $post->sexo = $request->sexo;
         $post->save();
-        return redirect('lista')->with('msg', 'Cadastrado com sucesso');
+        return redirect('lista');
     }
 
     public function destroy($id)
     {
         UserRegister::query()->where('id', '=', $id)->delete();
 
-        return redirect('lista')->with('alert', 'Excluído com sucesso');
+        return redirect('lista');
     }
 }
